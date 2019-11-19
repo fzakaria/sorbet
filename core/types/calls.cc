@@ -172,7 +172,7 @@ unique_ptr<Error> matchArgType(Context ctx, TypeConstraint &constr, Loc callLoc,
         if (!withoutNil->isBottom() &&
             Types::isSubTypeUnderConstraint(ctx, constr, withoutNil, expectedType, UntypedMode::AlwaysCompatible)) {
             if (loc.exists()) {
-                e.replaceWith("Wrap in `T.must`", loc, "Opus::SorbetMigrations::LoadOneMigration.must({})",
+                e.replaceWith("Wrap in `T.must`", loc, "Opus::SorbetMigrations::LoadAllMigration.must({})",
                               loc.source(ctx));
             }
         }
@@ -609,7 +609,7 @@ DispatchResult dispatchCallSymbol(Context ctx, DispatchArgs args,
             }
             if (args.fullType.get() != thisType && symbol == Symbols::NilClass()) {
                 e.replaceWith("Wrap in `T.must`", args.locs.receiver,
-                              "Opus::SorbetMigrations::LoadOneMigration.must({})",
+                              "Opus::SorbetMigrations::LoadAllMigration.must({})",
                               args.locs.receiver.source(ctx));
             } else {
                 if (symbol.data(ctx)->isClassOrModuleModule()) {
